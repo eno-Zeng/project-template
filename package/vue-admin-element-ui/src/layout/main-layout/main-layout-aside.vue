@@ -1,6 +1,6 @@
 <template>
   <el-aside
-    class="relative h-full w-(--main-layout-aside-width)! overflow-x-hidden overflow-y-auto"
+    class="main-layout-aside bx relative h-full w-(--main-layout-aside-width)! overflow-x-hidden overflow-y-auto"
   >
     <el-menu class="h-full" default-active="1-1" mode="vertical" :collapse="isAsideCollapsed">
       <el-sub-menu index="1">
@@ -27,4 +27,8 @@ defineEmits<{
 }>();
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.main-layout-aside {
+  --el-menu-bg-color: var(--a-color-bg-1);
+}
+</style>

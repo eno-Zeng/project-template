@@ -1,17 +1,19 @@
 <template>
   <el-header
-    class="flex flex-row items-center justify-between bg-(--main-layout-header-bg-color) p-0!"
+    class="flex flex-row items-center justify-between border-b border-b-(--a-color-border-3)! p-0!"
   >
     <el-space
-      :size="10"
-      class="flex h-(--main-layout-header-height) w-(--main-layout-aside-width) items-center gap-1 overflow-hidden bg-(--main-layout-logo-container-bg-color) pr-[10px] pl-[10px]"
+      :size="20"
+      class="flex h-(--main-layout-header-height) w-(--main-layout-aside-width) items-center gap-1 overflow-hidden border-r border-r-(--a-color-border-3)! pr-[10px] pl-[10px]"
     >
       <el-image class="w-[40px]" :src="LogoImage"></el-image>
-      <h2 v-show="!isAsideCollapsed" class="text-3xl text-amber-50">Project Logo</h2>
+      <h2 v-show="!isAsideCollapsed" class="text-3xl">管理系统</h2>
     </el-space>
     <el-dropdown trigger="hover" @command="handleDropdownCommand">
-      <div class="mr-5 rounded-sm border">
-        <el-icon :size="40"><user-filled /></el-icon>
+      <div
+        class="mr-[20px] flex size-[40px] items-center justify-center rounded-full border border-(--a-color-border-3)"
+      >
+        <el-icon :size="28"><avatar /></el-icon>
       </div>
       <template #dropdown>
         <el-dropdown-menu>
@@ -23,7 +25,7 @@
 </template>
 <script lang="ts" setup>
 import LogoImage from '@/assets/logo.svg';
-import { UserFilled } from '@element-plus/icons-vue';
+import { Avatar } from '@element-plus/icons-vue';
 
 defineProps<{ isAsideCollapsed: boolean }>();
 

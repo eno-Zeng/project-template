@@ -1,6 +1,6 @@
 <template>
   <el-container
-    class="main-layout flex h-full w-full flex-col"
+    class="main-layout flex h-full w-full bg-(--a-color-bg-1)"
     :class="{ collapsed: isAsideCollapsed }"
     direction="vertical"
   >
@@ -10,7 +10,7 @@
         :is-aside-collapsed="isAsideCollapsed"
         @switch-collapse="isAsideCollapsed = $event"
       />
-      <el-main class="flex-1 overflow-auto">
+      <el-main class="flex-1 overflow-x-hidden overflow-y-auto bg-(--a-color-bg-2-ff)">
         <router-view></router-view>
       </el-main>
     </main>
