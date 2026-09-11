@@ -1,6 +1,6 @@
 <template>
   <el-container
-    class="main-layout w-full h-full flex flex-col"
+    class="main-layout flex h-full w-full flex-col"
     :class="{ collapsed: isAsideCollapsed }"
     direction="vertical"
   >

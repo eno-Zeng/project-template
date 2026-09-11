@@ -1,6 +1,6 @@
 <template>
   <el-aside
-    class="h-full w-(--main-layout-aside-width)! overflow-x-hidden overflow-y-auto relative"
+    class="relative h-full w-(--main-layout-aside-width)! overflow-x-hidden overflow-y-auto"
   >
     <el-menu class="h-full" default-active="1-1" mode="vertical" :collapse="isAsideCollapsed">
       <el-sub-menu index="1">
@@ -12,7 +12,7 @@
     </el-menu>
     <el-button
       :icon="isAsideCollapsed ? Expand : Fold"
-      class="absolute bottom-[10px] right-[10px]"
+      class="absolute right-[10px] bottom-[10px]"
       @click="$emit('switchCollapse', !isAsideCollapsed)"
     />
   </el-aside>
