@@ -53,6 +53,7 @@ import { ElMessage, type FormInstance, type FormRules } from 'element-plus';
 import { UserFilled, Lock } from '@element-plus/icons-vue';
 import { useAccountStore } from '@/stores/account';
 import { useRouter } from 'vue-router';
+import { HomePage } from '@/router/constant';
 
 const { login } = useAccountStore();
 
@@ -72,7 +73,7 @@ const handleLogin = async () => {
   const { username, password } = formData.value;
   await login(username, password);
   ElMessage.success('登录成功');
-  router.replace({ name: 'Home' });
+  router.replace({ path: HomePage.path });
 };
 </script>
 

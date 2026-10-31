@@ -1,9 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { MainLayout } from '@/layout';
-import HomeView from '@/views/HomeView.vue';
 import Login from '@/views/login.vue';
 import NotFound from '@/views/not-found.vue';
 import { useAccountStore } from '@/stores/account';
+import { HomePage, modules } from './constant';
 
 const router = createRouter({
   history: createWebHashHistory(''),
@@ -11,17 +11,11 @@ const router = createRouter({
     {
       path: '/',
       component: MainLayout,
-      redirect: '/home',
+      redirect: HomePage.path,
       meta: {
         requiresAuth: true,
       },
-      children: [
-        {
-          path: 'home',
-          name: 'Home',
-          component: HomeView,
-        },
-      ],
+      children: modules,
     },
     {
       path: '/login',
@@ -51,7 +45,7 @@ const router = createRouter({
 router.beforeEach((to, form, next) => {
   const accountStore = useAccountStore();
   const isToLoginPage = to.name === 'Login';
-  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
   if (isToLoginPage) {
     if (accountStore.isLogin) next(form);
