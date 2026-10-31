@@ -25,12 +25,26 @@
 </template>
 <script lang="ts" setup>
 import LogoImage from '@/assets/logo.svg';
+import { useAccountStore } from '@/stores/account';
 import { Avatar } from '@element-plus/icons-vue';
+import { useRouter } from 'vue-router';
 
 defineProps<{ isAsideCollapsed: boolean }>();
 
+const { logout } = useAccountStore();
+
+const router = useRouter();
+
 const handleDropdownCommand = (command: string) => {
-  console.log(command);
+  switch (command) {
+    case 'logout':
+      logout();
+      router.push({ name: 'Login' });
+      break;
+
+    default:
+      break;
+  }
 };
 </script>
 
