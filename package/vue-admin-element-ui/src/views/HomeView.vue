@@ -1,13 +1,6 @@
 <template>
   <main>
     <h1 class="mb-4 text-xl font-bold">Home Page</h1>
-    <el-table :data="users" border>
-      <el-table-column prop="id" label="ID" width="80" />
-      <el-table-column prop="name" label="姓名" />
-      <el-table-column prop="role" label="角色" />
-      <el-table-column prop="email" label="邮箱" />
-    </el-table>
-    <p v-if="error" class="mt-4 text-red-500">{{ error }}</p>
   </main>
 </template>
 
