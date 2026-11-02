@@ -9,7 +9,7 @@ const getIsUrlParams = (method?: METHOD) => {
 };
 
 const createRequest = (config: RequestConfig): Request => {
-  const { url, isLoading, data, params, ...others } = config;
+  const { url, data, params, ...others } = config;
 
   // 处理参数
   const isUrlParams = getIsUrlParams(others.method);
@@ -46,13 +46,16 @@ const handleResponse = async <T>(response: Response): Promise<ResponseData<T>> =
 };
 
 export default async <T>(config: RequestConfig | string): Promise<ResponseData<T>> => {
-  const _config: RequestConfig = typeof config === 'string' ? { url: config } : { ...config };
+  const { isLoading, ..._config }: RequestConfig =
+    typeof config === 'string' ? { url: config } : { ...config };
 
   const appStore = useAppStore();
 
   const request = createRequest(_config);
 
-  const response = await appStore.executorLoading(() => fetch(request));
+  const response = await (isLoading
+    ? appStore.executorLoading(() => fetch(request))
+    : fetch(request));
 
   return handleResponse(response);
 };
