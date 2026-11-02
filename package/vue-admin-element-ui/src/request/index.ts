@@ -3,6 +3,7 @@ import type { METHOD, RequestConfig, ResponseData } from './type';
 import { ElMessage } from 'element-plus';
 import qs from 'query-string';
 import { useAccountStore } from '@/stores/account';
+import useAbort from '../hooks/useAbort';
 
 let accountStore: ReturnType<typeof useAccountStore>;
 const getAccountStore = () => {
@@ -10,13 +11,15 @@ const getAccountStore = () => {
   return accountStore;
 };
 
+const abort = useAbort();
+
 const getIsUrlParams = (method?: METHOD) => {
   const _method = method || 'GET';
   return ['GET', 'DELETE'].includes(_method);
 };
 
 const createRequest = (config: RequestConfig): Request => {
-  const { url, data, params, ...others } = config;
+  const { url, data, params, abortKey, ...others } = config;
 
   // 处理参数
   const isUrlParams = getIsUrlParams(others.method);
@@ -26,6 +29,12 @@ const createRequest = (config: RequestConfig): Request => {
     fullUrl = `${url}?${qs.stringify(params)}`;
   } else {
     requestBody = data && JSON.stringify(data);
+  }
+
+  // 处理 abortKey
+  if (abortKey) {
+    abort.setItem(abortKey);
+    others.signal = abort.getAbortControllerSignal(abortKey);
   }
 
   const request = new Request(fullUrl, { ...others, body: requestBody });
@@ -44,7 +53,15 @@ const createRequest = (config: RequestConfig): Request => {
   return request;
 };
 
-const handleResponse = async <T>(response: Response): Promise<ResponseData<T>> => {
+const handleResponse = async <T>(
+  response: Response,
+  requestConfig: RequestConfig
+): Promise<ResponseData<T>> => {
+  // 处理 abortKey
+  if (requestConfig.abortKey) {
+    abort.removeItem(requestConfig.abortKey);
+  }
+
   if (!response.ok) throw new Error(`请求失败: HTTP ${response.status}`);
 
   const data: ResponseData<T> = await response.json();
@@ -69,5 +86,10 @@ export default async <T>(config: RequestConfig | string): Promise<ResponseData<T
     ? appStore.executorLoading(() => fetch(request))
     : fetch(request));
 
-  return handleResponse(response);
+  return handleResponse(response, _config);
+};
+
+export const createAbort = (): [symbol, () => void] => {
+  const abortKey = abort.getAbortKey();
+  return [abortKey, () => abort.abort(abortKey)];
 };

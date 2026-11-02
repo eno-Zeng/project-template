@@ -6,6 +6,7 @@ export interface RequestConfig extends Omit<RequestInit, 'body'> {
   method?: METHOD;
   data?: Record<string, any>;
   params?: Record<string, any>;
+  abortKey?: symbol;
 }
 
 export interface ResponseData<T = unknown> {
