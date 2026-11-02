@@ -2,6 +2,13 @@ import { useAppStore } from '@/stores/app';
 import type { METHOD, RequestConfig, ResponseData } from './type';
 import { ElMessage } from 'element-plus';
 import qs from 'query-string';
+import { useAccountStore } from '@/stores/account';
+
+let accountStore: ReturnType<typeof useAccountStore>;
+const getAccountStore = () => {
+  if (!accountStore) accountStore = useAccountStore();
+  return accountStore;
+};
 
 const getIsUrlParams = (method?: METHOD) => {
   const _method = method || 'GET';
@@ -27,7 +34,12 @@ const createRequest = (config: RequestConfig): Request => {
   if (!request.headers.has('Content-Type'))
     request.headers.set('Content-Type', 'application/json;charset=utf-8');
 
-  // TODO: 处理 token
+  // 处理 token
+  const { getToken } = getAccountStore();
+  const token = getToken();
+  if (token) {
+    request.headers.set('Authorization', `Bearer ${token}`);
+  }
 
   return request;
 };
