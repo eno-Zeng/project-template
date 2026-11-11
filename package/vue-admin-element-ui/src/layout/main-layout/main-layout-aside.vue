@@ -60,7 +60,7 @@ const menuItems = buildRouteMenus(modules);
 const getActiveMenu = () => {
   const currentMenuRoute = [...route.matched].reverse().find(record => record.meta.isMenu) ?? route;
 
-  return currentMenuRoute.name ?? currentMenuRoute.path;
+  return currentMenuRoute.path;
 };
 </script>
 
