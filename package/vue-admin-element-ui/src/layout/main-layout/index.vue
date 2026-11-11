@@ -3,17 +3,17 @@
     v-loading="appStore.isLoading"
     element-loading-background="rgba(0, 0, 0, 0.5)"
     element-loading-text="加载中..."
-    class="main-layout flex h-full w-full bg-(--a-color-bg-1)"
+    class="main-layout flex h-full w-full overflow-hidden bg-(--a-color-bg-1)"
     :class="{ collapsed: isAsideCollapsed }"
     direction="vertical"
   >
     <main-layout-heder :is-aside-collapsed="isAsideCollapsed" />
-    <main class="flex flex-1 flex-row p-0">
+    <main class="flex flex-1 flex-row overflow-hidden p-0">
       <main-layout-aside
         :is-aside-collapsed="isAsideCollapsed"
         @switch-collapse="isAsideCollapsed = $event"
       />
-      <el-main class="flex-1 overflow-x-hidden overflow-y-auto bg-(--a-color-bg-2-ff)">
+      <el-main class="flex-1 overflow-auto bg-(--a-color-bg-2-ff)">
         <router-view></router-view>
       </el-main>
     </main>
