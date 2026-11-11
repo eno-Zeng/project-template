@@ -20,11 +20,16 @@ export const useAccountStore = defineStore('account', () => {
     userInfo.value = { ..._userInfo };
   };
 
-  const logout = () => {
-    logoutRequest();
+  /** 仅清理本地登录态, 不发起退出请求 (用于 401 等被动失效场景) */
+  const clearAccount = () => {
     token.value = '';
     userInfo.value = { username: '' };
   };
 
-  return { getToken, login, logout, isLogin };
+  const logout = () => {
+    logoutRequest();
+    clearAccount();
+  };
+
+  return { getToken, login, logout, clearAccount, isLogin };
 });
