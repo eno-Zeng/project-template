@@ -8,6 +8,7 @@ export const HomePage = {
   meta: {
     title: '首页',
     isMenu: true,
+    icon: 'HomeFilled',
   },
 };
 

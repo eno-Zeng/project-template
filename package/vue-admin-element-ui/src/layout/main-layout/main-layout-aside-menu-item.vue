@@ -14,13 +14,13 @@ defineProps<{
   <el-sub-menu v-if="item.children.length" :index="item.key">
     <template #title>
       <el-icon><component :is="item.icon" /></el-icon>
-      {{ item.title }}
+      <span>{{ item.title }}</span>
     </template>
-    <MainLayoutAsideMenuItem v-for="child in item.children" :key="child.key" :item="child" />
+    <main-layout-aside-menu-item v-for="child in item.children" :key="child.key" :item="child" />
   </el-sub-menu>
   <el-menu-item v-else :index="item.path">
+    <el-icon><component :is="item.icon" /></el-icon>
     <template #title>
-      <el-icon><component :is="item.icon" /></el-icon>
       {{ item.title }}
     </template>
   </el-menu-item>
