@@ -62,7 +62,7 @@ interface UseListConfig<P = any, T = any> {
      */
     listDataKey?: string;
     /**
-     * 总条数 默认 pageInfo.items
+     * 总条数 默认 pageInfo.total
      * 例： 响应数据为 { data: { list: [], total: 0 } } 则传递 data.total;
      */
     totalKey?: string;
@@ -128,8 +128,10 @@ export function useList<P extends object = any, T = any>(config: UseListConfig<P
     }
 
     const res = await executor(api, apiParams);
-    let _list = get(res, listDataKey);
-    total.value = Number(get(res, totalKey!) || 0);
+    // 默认路径直接按类型读取(契约变更有 TS 报错保护), 自定义路径才回退到 lodash get
+    let _list = (listDataKey === 'data' ? res.data : get(res, listDataKey)) as T[];
+    total.value =
+      totalKey === 'pageInfo.total' ? (res.pageInfo?.total ?? 0) : Number(get(res, totalKey) || 0);
     if (handleResponseData) _list = handleResponseData(_list);
     list.value = _list;
     return _list;
