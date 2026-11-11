@@ -14,10 +14,16 @@ export const useAccountStore = defineStore('account', () => {
   const isLogin = computed(() => !!token.value);
 
   const login = async (username: string, password: string) => {
-    const { data: _token } = await loginRequest({ username, password });
-    token.value = _token;
-    const { data: _userInfo } = await getUserInfo();
-    userInfo.value = { ..._userInfo };
+    try {
+      const { data: _token } = await loginRequest({ username, password });
+      token.value = _token;
+      const { data: _userInfo } = await getUserInfo();
+      userInfo.value = { ..._userInfo };
+    } catch (error) {
+      // 任一环节失败都回滚为未登录状态, 避免"已登录但无用户信息"的中间态
+      clearAccount();
+      throw error;
+    }
   };
 
   /** 仅清理本地登录态, 不发起退出请求 (用于 401 等被动失效场景) */
@@ -27,7 +33,8 @@ export const useAccountStore = defineStore('account', () => {
   };
 
   const logout = () => {
-    logoutRequest();
+    // 退出接口失败不阻断本地登出, 不产生 unhandled rejection, 错误提示由请求层统一处理
+    logoutRequest().catch(() => {});
     clearAccount();
   };
 
