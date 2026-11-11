@@ -4,7 +4,6 @@ import Mock from 'mockjs';
 const users = Array.from({ length: 10 }, () => ({
   id: Mock.Random.id(),
   name: Mock.Random.cname(),
-  // mockjs 没有 Random.mobile，用自定义规则生成手机号
   phone: Mock.mock(/^1[3-9]\d{9}$/),
   email: Mock.Random.email(),
 }));
@@ -12,9 +11,19 @@ const users = Array.from({ length: 10 }, () => ({
 export default defineMock({
   url: '/api/user/list',
   method: 'GET',
-  body: {
-    code: 200,
-    message: 'ok',
-    data: users,
-  },
+  body: () =>
+    new Promise(resolve => {
+      setTimeout(() => {
+        resolve({
+          code: 200,
+          message: 'ok',
+          data: users,
+          pageInfo: {
+            total: users.length,
+            page: 1,
+            pageSize: 10,
+          },
+        });
+      }, 3000);
+    }),
 });
