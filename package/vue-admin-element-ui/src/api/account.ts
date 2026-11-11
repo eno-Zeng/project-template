@@ -1,12 +1,5 @@
 import request from '@/request';
 
-interface LoginResponse {
-  token: string;
-  user: {
-    username: string;
-  };
-}
-
 /**
  * 登录请求
  */
