@@ -11,19 +11,27 @@ const users = Array.from({ length: 10 }, () => ({
 export default defineMock({
   url: '/api/user/list',
   method: 'GET',
-  body: () =>
-    new Promise(resolve => {
+  body: request => {
+    console.log('mock: /api/user/list', request.query);
+    const { pageNum, pageSize } = request.query;
+    return new Promise(resolve => {
       setTimeout(() => {
         resolve({
           code: 200,
           message: 'ok',
-          data: users,
+          data: Array.from({ length: Number(pageSize) || 10 }, () => ({
+            id: Mock.Random.id(),
+            name: Mock.Random.cname(),
+            phone: Mock.mock(/^1[3-9]\d{9}$/),
+            email: Mock.Random.email(),
+          })),
           pageInfo: {
-            total: users.length,
-            page: 1,
-            pageSize: 10,
+            total: 1000,
+            page: Number(pageNum) || 1,
+            pageSize: Number(pageSize) || 10,
           },
         });
-      }, 3000);
-    }),
+      });
+    });
+  },
 });
