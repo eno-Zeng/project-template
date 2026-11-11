@@ -12,7 +12,6 @@ export default defineMock({
   url: '/api/user/list',
   method: 'GET',
   body: request => {
-    console.log('mock: /api/user/list', request.query);
     const { pageNum, pageSize } = request.query;
     return new Promise(resolve => {
       setTimeout(() => {
@@ -31,7 +30,7 @@ export default defineMock({
             pageSize: Number(pageSize) || 10,
           },
         });
-      });
+      }, 500);
     });
   },
 });

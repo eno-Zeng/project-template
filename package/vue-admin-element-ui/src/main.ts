@@ -11,6 +11,7 @@ import * as ElementPlusIcons from '@element-plus/icons-vue';
 import '@/styles/index.css';
 
 import Layout from '@/layout';
+import Components from '@/components';
 
 const app = createApp(App);
 
@@ -21,5 +22,6 @@ for (const [key, component] of Object.entries(ElementPlusIcons)) {
   app.component(key, component);
 }
 app.use(Layout);
+app.use(Components);
 
 app.mount('#app');

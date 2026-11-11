@@ -92,7 +92,7 @@ export function useList<P extends object = any, T = any>(config: UseListConfig<P
 
   const {
     listDataKey = 'data',
-    totalKey = 'pageInfo.items',
+    totalKey = 'pageInfo.total',
     handleResponseData,
   } = cacheConfig.response || {};
 
