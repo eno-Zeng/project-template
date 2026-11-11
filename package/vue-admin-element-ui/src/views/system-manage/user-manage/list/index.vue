@@ -51,7 +51,7 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { getUserList } from './api';
+import { getUserList, abortGetUserList } from './api';
 import { useList } from '@/hooks/useList';
 import type { UserListItem } from './api/type';
 import { useRouter } from 'vue-router';
@@ -59,6 +59,7 @@ import { useRouter } from 'vue-router';
 const { params, list, isLoading, total, handleSearch, handleSizeChange, handleReset } = useList({
   request: {
     api: getUserList,
+    abortRequest: abortGetUserList,
     params: {
       name: '',
       phone: '',

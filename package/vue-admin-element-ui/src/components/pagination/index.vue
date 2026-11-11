@@ -8,13 +8,13 @@
       :layout="layout"
       :background="background"
       :disabled="disabled"
+      @size-change="emit('size-change', $event)"
+      @current-change="emit('current-change', $event)"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { watch } from 'vue';
-
 withDefaults(
   defineProps<{
     total: number;
@@ -38,14 +38,6 @@ const emit = defineEmits<{
 
 const currentPage = defineModel<number>({ default: 1, required: true });
 const pageSize = defineModel<number>('pageSize', { default: 10 });
-
-watch(currentPage, newVal => {
-  emit('current-change', newVal);
-});
-
-watch(pageSize, newVal => {
-  emit('size-change', newVal);
-});
 </script>
 
 <script lang="ts">
