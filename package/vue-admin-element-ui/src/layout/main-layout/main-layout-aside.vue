@@ -35,11 +35,6 @@ defineEmits<{
 
 const route = useRoute();
 
-const getRouteMenuPath = (record: Pick<RouteRecordRaw, 'path' | 'redirect'>) => {
-  if (typeof record.redirect === 'string') return record.redirect;
-  return record.path;
-};
-
 const buildRouteMenus = (routes: readonly RouteRecordRaw[]): MenuItem[] => {
   return routes
     .filter(record => record.meta?.isMenu)
@@ -63,9 +58,9 @@ const buildRouteMenus = (routes: readonly RouteRecordRaw[]): MenuItem[] => {
 const menuItems = buildRouteMenus(modules);
 
 const getActiveMenu = () => {
-  const currentMenuRoute = [...route.matched].reverse().find(record => record.meta.isMenu);
+  const currentMenuRoute = [...route.matched].reverse().find(record => record.meta.isMenu) ?? route;
 
-  return currentMenuRoute ? getRouteMenuPath(currentMenuRoute) : route.path;
+  return currentMenuRoute.name ?? currentMenuRoute.path;
 };
 </script>
 
