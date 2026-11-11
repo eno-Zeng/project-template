@@ -8,6 +8,7 @@ export const login = (data: { username: string; password: string }) =>
     url: '/api/login',
     method: 'POST',
     data,
+    isLoading: true,
   });
 
 /**
@@ -16,6 +17,7 @@ export const login = (data: { username: string; password: string }) =>
 export const getUserInfo = () =>
   request<{ username: string }>({
     url: '/api/account/user-info',
+    isLoading: true,
   });
 
 /**

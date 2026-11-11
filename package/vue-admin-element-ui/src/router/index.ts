@@ -52,7 +52,8 @@ router.beforeEach((to, form, next) => {
     else next();
   } else if (requiresAuth) {
     if (accountStore.isLogin) next();
-    else next({ name: 'Login' });
+    // 携带目标地址, 登录成功后回跳
+    else next({ name: 'Login', query: { redirect: to.fullPath } });
   } else {
     next();
   }
