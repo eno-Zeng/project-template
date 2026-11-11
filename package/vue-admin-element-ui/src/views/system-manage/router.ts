@@ -29,11 +29,19 @@ const route: IRoute = {
           },
         },
         {
-          path: '/system-manage/user-manage/detail',
+          path: '/system-manage/user-manage/detail/:id',
           name: 'SystemManageUserManageDetail',
           component: () => import('@/views/system-manage/user-manage/detail/index.vue'),
           meta: {
             title: '用户详情',
+          },
+        },
+        {
+          path: '/system-manage/user-manage/edit/:id',
+          name: 'SystemManageUserManageEdit',
+          component: () => import('@/views/system-manage/user-manage/detail/index.vue'),
+          meta: {
+            title: '用户编辑',
           },
         },
       ],

@@ -29,8 +29,8 @@
         <el-table-column prop="email" label="邮箱" />
         <el-table-column label="操作">
           <template #default="{ row }">
-            <el-button type="text" size="mini" @click="toUserMangeDetail(row)">详情</el-button>
-            <el-button type="text" size="mini" @click="toUserMangeEdit(row)">编辑</el-button>
+            <el-button type="text" @click="toUserMangeDetail(row)">详情</el-button>
+            <el-button type="text" @click="toUserMangeEdit(row)">编辑</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -54,6 +54,7 @@ import { onMounted } from 'vue';
 import { getUserList } from './api';
 import { useList } from '@/hooks/useList';
 import type { UserListItem } from './api/type';
+import { useRouter } from 'vue-router';
 
 const { params, list, isLoading, total, handleSearch, handleSizeChange, handleReset } = useList({
   request: {
@@ -68,12 +69,24 @@ const { params, list, isLoading, total, handleSearch, handleSizeChange, handleRe
   },
 });
 
+const router = useRouter();
+
 const toUserMangeDetail = (row: UserListItem) => {
-  console.log(row);
+  router.push({
+    name: 'SystemManageUserManageDetail',
+    params: {
+      id: row.id,
+    },
+  });
 };
 
 const toUserMangeEdit = (row: UserListItem) => {
-  console.log(row);
+  router.push({
+    name: 'SystemManageUserManageEdit',
+    params: {
+      id: row.id,
+    },
+  });
 };
 
 onMounted(() => {
