@@ -87,10 +87,7 @@ const handleUnauthorized = async () => {
 };
 
 /** 校验响应, 异常时抛出对应类型的错误, 由 handleError 统一处理 */
-const handleResponse = async <T>(
-  response: Response,
-  _config: RequestConfig
-): Promise<ResponseData<T>> => {
+const handleResponse = async <T>(response: Response): Promise<ResponseData<T>> => {
   if (!response.ok) throw new HttpError(response.status);
 
   const data: ResponseData<T> = await response.json();
@@ -134,33 +131,39 @@ const handleError = async (error: unknown): Promise<never> => {
   throw error;
 };
 
-export default async <T>(config: RequestConfig | string): Promise<ResponseData<T>> => {
+/** 执行请求并统一处理错误 */
+const execute = async <T>(config: RequestConfig, isLoading?: boolean): Promise<ResponseData<T>> => {
+  try {
+    const doFetch = () => fetch(createRequest(config));
+    const response = await (isLoading ? getAppStore().executorLoading(doFetch) : doFetch());
+    return await handleResponse<T>(response);
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+/** abort 生命周期管理: 挂 signal 并加计数, 执行结束(成功/失败/取消)后释放计数 */
+const withAbort = async <T>(
+  config: RequestConfig,
+  abortKey: symbol | undefined,
+  exec: () => Promise<T>
+): Promise<T> => {
+  if (!abortKey) return exec();
+
+  abort.setItem(abortKey);
+  config.signal = abort.getAbortControllerSignal(abortKey);
+  try {
+    return await exec();
+  } finally {
+    abort.removeItem(abortKey);
+  }
+};
+
+export default <T>(config: RequestConfig | string): Promise<ResponseData<T>> => {
   const { isLoading, abortKey, ..._config }: RequestConfig =
     typeof config === 'string' ? { url: config } : { ...config };
 
-  const appStore = getAppStore();
-
-  try {
-    // 处理 abortKey: 与 finally 中的 removeItem 成对, 计数生命周期统一在此函数内管理
-    if (abortKey) {
-      abort.setItem(abortKey);
-      _config.signal = abort.getAbortControllerSignal(abortKey);
-    }
-
-    const request = createRequest(_config);
-
-    const response = await (isLoading
-      ? appStore.executorLoading(() => fetch(request))
-      : fetch(request));
-    return await handleResponse<T>(response, _config);
-  } catch (error) {
-    return handleError(error);
-  } finally {
-    // 成功、失败、取消都释放 abort 计数, 避免泄漏
-    if (abortKey) {
-      abort.removeItem(abortKey);
-    }
-  }
+  return withAbort(_config, abortKey, () => execute<T>(_config, isLoading));
 };
 
 export const createAbort = (): [symbol, () => void] => {
