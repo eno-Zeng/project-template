@@ -36,19 +36,19 @@ const router = createRouter({
 
 /**
  * 若前往登录页时:
- *    已登录: 返回原来的页面, next(form)
+ *    已登录: 返回原来的页面, next(from)
  *    未登录: 不拦截直接 next()
  * 若前往未登录页时:
  *    已登录: 不拦截直接 next()
  *    未登录: 直接跳转登录页
  */
-router.beforeEach((to, form, next) => {
+router.beforeEach((to, from, next) => {
   const accountStore = useAccountStore();
   const isToLoginPage = to.name === 'Login';
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
   if (isToLoginPage) {
-    if (accountStore.isLogin) next(form);
+    if (accountStore.isLogin) next(from);
     else next();
   } else if (requiresAuth) {
     if (accountStore.isLogin) next();
