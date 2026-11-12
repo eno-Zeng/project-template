@@ -98,8 +98,7 @@ const handleResponse = async <T>(response: Response): Promise<ResponseData<T>> =
 
 /** 统一错误处理: 主动取消静默中断, 401 清理登录态并跳转登录页, 其他错误提示后抛出 */
 const handleError = async (error: unknown): Promise<never> => {
-  // 主动取消: 返回永不 settle 的 Promise
-  // 调用方无需感知取消事件, 不会产生 unhandled rejection, 也不会继续执行后续逻辑
+  // 主动取消: 静默 reject, 不弹出 ElMessage 提示
   if (isAbortError(error)) {
     return Promise.reject(error);
   }
