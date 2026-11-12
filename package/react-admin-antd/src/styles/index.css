@@ -1,0 +1,28 @@
+@layer theme, base, components, utilities;
+
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@import './var.css';
+@import './reset.css' layer(base);
+
+:root {
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+  color: var(--a-color-text-1);
+  background-color: var(--a-color-bg-1);
+}
+
+html,
+body,
+#root,
+.ant-app {
+  height: 100%;
+}
