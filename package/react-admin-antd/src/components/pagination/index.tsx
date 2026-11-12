@@ -36,12 +36,9 @@ export default function Pagination({
         showSizeChanger
         showTotal={count => `共 ${count} 条`}
         disabled={disabled}
-        onChange={(page, size) => {
-          if (size !== pageSize) {
-            onSizeChange?.(size);
-            return;
-          }
-          onCurrentChange?.(page);
+        onShowSizeChange={onSizeChange}
+        onChange={page => {
+          if (page !== current) onCurrentChange?.(page);
         }}
       />
     </div>
