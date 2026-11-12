@@ -34,6 +34,12 @@ const router = createRouter({
   ],
 });
 
+let accountStore: ReturnType<typeof useAccountStore> | undefined;
+const getAccountStore = () => {
+  if (accountStore) return accountStore;
+  accountStore = useAccountStore();
+  return accountStore;
+};
 /**
  * 若前往登录页时:
  *    已登录: 返回原来的页面, next(from)
@@ -43,7 +49,7 @@ const router = createRouter({
  *    未登录: 直接跳转登录页
  */
 router.beforeEach((to, from, next) => {
-  const accountStore = useAccountStore();
+  const accountStore = getAccountStore();
   const isToLoginPage = to.name === 'Login';
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
