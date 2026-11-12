@@ -78,7 +78,7 @@ export function useList<P extends object = any, T = any>(config: UseListConfig<P
   const defaultParams: DeepReadonly<P> = cloneDeep(config.request.params || ({} as P));
 
   const {
-    pageNumKey = 'page',
+    pageNumKey = 'pageNum',
     pageSizeKey = 'pageSize',
     lazy,
     watchParams = false,
