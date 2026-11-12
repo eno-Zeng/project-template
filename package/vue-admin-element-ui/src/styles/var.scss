@@ -1,0 +1,66 @@
+:root {
+  /* 主色 */
+  --a-color-primary-1-default: #0a95a6; /* 常规 */
+  --a-color-primary-2-hover: #47b0bc; /* 悬浮 */
+  --a-color-primary-3-press: #018899; /* 点击 */
+  --a-color-primary-4-disabled: #9dd5db; /* 一般禁用 */
+  --a-color-primary-5-disable-text: #ceeaed; /* 文字禁用 */
+  --a-color-primary-6-light-bg: #e7f5f7; /* 浅色/悬浮 */
+  /* 中性色(文本) */
+  --a-color-text-1: #1d2129; /* 强调/标题/正文 */
+  --a-color-text-2: #4e5969; /* 次强调/正文 */
+  --a-color-text-3: #86909c; /* 次要文本 */
+  --a-color-text-4: #c9cdd4; /* 禁用文本 */
+  --a-color-text-5-ff: #fff; /* 纯白文本 */
+  /* 背景 */
+  --a-color-bg-1: #fcfcfc; /* 页面大背景 */
+  --a-color-bg-2-ff: #ffffff; /* 纯白背景 */
+  /* 填充 */
+  --a-color-fill-1: #c9cdd4; /* 深/特殊场景 */
+  --a-color-fill-2: #e5e6eb; /* 深/灰底悬浮 */
+  --a-color-fill-3: #f2f3f5; /* 常规/白底悬浮 */
+  --a-color-fill-4: #f7f8fa; /* 浅/禁用 */
+  /* 边框 */
+  --a-color-border-1: #86909c; /* 重/特殊描边 */
+  --a-color-border-2: #c9cdd4; /* 深/悬浮 */
+  --a-color-border-3: #e5e6eb; /* 一般 */
+  --a-color-border-4: #f2f3f5; /* 浅色 */
+  /* 功能色-成功 */
+  --a-color-success-1-default: #0aa953; /* 常规 */
+  --a-color-success-2-hover: #47bf7e; /* 悬浮 */
+  --a-color-success-3-press: #009243; /* 点击 */
+  --a-color-success-4-disabled: #69e6a3; /* 一般禁用 */
+  --a-color-success-5-disable-text: #adfad0; /* 文字禁用 */
+  --a-color-success-6-light-bg: #e2ffef; /* 浅色/悬浮 */
+  /* 功能色-信息 */
+  --a-color-info-1-default: #1e66f0; /* 常规 */
+  --a-color-info-2-hover: #578cf4; /* 悬浮 */
+  --a-color-info-3-press: #0952de; /* 点击 */
+  --a-color-info-4-disabled: #a5c2f9; /* 一般禁用 */
+  --a-color-info-5-disable-text: #d2e0fc; /* 文字禁用 */
+  --a-color-info-6-light-bg: #e9f0fe; /* 浅色/悬浮 */
+  /* 功能色-警告 */
+  --a-color-warning-1-default: #fe8f0d; /* 常规 */
+  --a-color-warning-2-hover: #ffab4a; /* 悬浮 */
+  --a-color-warning-3-press: #ef8508; /* 点击 */
+  --a-color-warning-4-disabled: #ffd29e; /* 一般禁用 */
+  --a-color-warning-5-disable-text: #ffe9cf; /* 文字禁用 */
+  --a-color-warning-6-light-bg: #fff4e7; /* 浅色/悬浮 */
+  /* 功能色-危险 */
+  --a-color-danger-1-default: #f63434; /* 常规 */
+  --a-color-danger-2-hover: #f96767; /* 悬浮 */
+  --a-color-danger-3-press: #e50505; /* 点击 */
+  --a-color-danger-4-disabled: #fdd6d6; /* 一般禁用 */
+  --a-color-danger-5-disable-text: #fccede; /* 文字禁用 */
+  --a-color-danger-6-light-bg: #ffebeb; /* 浅色/悬浮 */
+
+  /* 文本大小 */
+  --a-size-text-default: 14px;
+  --a-size-text-small: 12px;
+  --a-size-text-lg: 20px;
+
+  /* 标题文本大小 */
+  --a-size-title-default: 20px;
+  --a-size-title-lg: 30px;
+  --a-size-title-xl: 40px;
+}
