@@ -1,0 +1,104 @@
+@use '@/styles/variables.scss' as *;
+
+.tabBar {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  padding: $spacing-sm $page-padding $spacing-lg;
+  background: $color-bg-card;
+  border-top: 1rpx solid $color-border;
+  box-shadow: $shadow-float;
+}
+
+.tabItem {
+  flex: 1;
+  min-height: 96rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all $transition-fast;
+
+  &:active {
+    opacity: 0.7;
+    transform: scale(0.97);
+  }
+}
+
+.tabIcon {
+  width: 48rpx;
+  height: 48rpx;
+  margin-bottom: $spacing-xs;
+  position: relative;
+}
+
+.homeIcon,
+.userIcon {
+  width: 48rpx;
+  height: 48rpx;
+  position: relative;
+}
+
+.homeRoof {
+  position: absolute;
+  top: 6rpx;
+  left: 12rpx;
+  width: 22rpx;
+  height: 22rpx;
+  border-top: 3rpx solid $color-text-tertiary;
+  border-left: 3rpx solid $color-text-tertiary;
+  border-radius: 3rpx;
+  transform: rotate(45deg);
+  box-sizing: border-box;
+}
+
+.homeBody {
+  position: absolute;
+  left: 9rpx;
+  bottom: 4rpx;
+  width: 30rpx;
+  height: 25rpx;
+  border: 3rpx solid $color-text-tertiary;
+  border-top: 0;
+  border-radius: 0 0 $radius-xs $radius-xs;
+  box-sizing: border-box;
+}
+
+.userHead {
+  position: absolute;
+  top: 3rpx;
+  left: 16rpx;
+  width: 17rpx;
+  height: 17rpx;
+  border: 3rpx solid $color-text-tertiary;
+  border-radius: $radius-round;
+  box-sizing: border-box;
+}
+
+.userBody {
+  position: absolute;
+  left: 8rpx;
+  bottom: 3rpx;
+  width: 33rpx;
+  height: 20rpx;
+  border: 3rpx solid $color-text-tertiary;
+  border-bottom: 0;
+  border-radius: $radius-lg $radius-lg 0 0;
+  box-sizing: border-box;
+}
+
+.iconActive {
+  border-color: $color-primary;
+}
+
+.tabLabel {
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+  line-height: $line-height-tight;
+  white-space: nowrap;
+}
+
+.tabLabelActive {
+  color: $color-primary;
+  font-weight: $font-weight-semibold;
+}

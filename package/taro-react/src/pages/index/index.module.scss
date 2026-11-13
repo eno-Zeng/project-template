@@ -1,0 +1,321 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: $color-bg-page;
+}
+
+.content {
+  flex: 1;
+  min-height: 0;
+  padding: 0 $page-padding;
+  box-sizing: border-box;
+}
+
+.inner {
+  width: 100%;
+  max-width: $max-content-width;
+  margin: 0 auto;
+  padding: $spacing-lg 0 $spacing-xl;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-lg;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.brandMark {
+  width: 72rpx;
+  height: 72rpx;
+  margin-right: $spacing-sm;
+  border-radius: $radius-lg;
+  background: $color-primary;
+  @include flex-center;
+}
+
+.brandMarkText {
+  color: $color-text-white;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+}
+
+.brandName {
+  display: block;
+  color: $color-text-primary;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  letter-spacing: 4rpx;
+  line-height: $line-height-tight;
+}
+
+.brandSlogan {
+  display: block;
+  margin-top: $spacing-xs;
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+}
+
+.profileButton {
+  min-width: 96rpx;
+  height: 88rpx;
+  padding: 0 $spacing-md;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-button;
+  background: $color-bg-card;
+  box-sizing: border-box;
+  transition: all $transition-fast;
+  @include flex-center;
+
+  &:active {
+    opacity: 0.8;
+    transform: scale(0.97);
+  }
+}
+
+.profileButtonText {
+  color: $color-primary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
+.bannerSection {
+  position: relative;
+  width: 100%;
+  height: 320rpx;
+  overflow: hidden;
+  border-radius: $radius-xl;
+  background: $color-primary-dark;
+  box-shadow: $shadow-card;
+}
+
+.swiper,
+.bannerItem,
+.bannerImage {
+  width: 100%;
+  height: 100%;
+}
+
+.bannerItem {
+  position: relative;
+  overflow: hidden;
+  border-radius: $radius-xl;
+}
+
+.bannerOverlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 80rpx $spacing-lg $spacing-lg;
+  background: rgba(20, 23, 42, 0.68);
+}
+
+.bannerEyebrow {
+  display: block;
+  margin-bottom: $spacing-xs;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: $font-size-xs;
+  letter-spacing: 2rpx;
+}
+
+.bannerTitle {
+  display: block;
+  max-width: 560rpx;
+  padding-right: 72rpx;
+  color: $color-text-white;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-normal;
+  @include text-ellipsis;
+}
+
+.indicators {
+  position: absolute;
+  right: $spacing-lg;
+  bottom: $spacing-lg;
+  display: flex;
+  align-items: center;
+}
+
+.indicator {
+  width: 12rpx;
+  height: 12rpx;
+  margin-left: $spacing-xs;
+  border-radius: $radius-round;
+  background: rgba(255, 255, 255, 0.45);
+  transition: all $transition-base;
+}
+
+.indicatorActive {
+  width: 32rpx;
+  background: $color-text-white;
+}
+
+.navCard {
+  display: flex;
+  align-items: center;
+  margin-top: $spacing-md;
+  padding: $spacing-md $spacing-sm;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-lg;
+  background: $color-bg-card;
+}
+
+.navItem {
+  width: 25%;
+  min-height: 128rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all $transition-fast;
+
+  &:active {
+    opacity: 0.7;
+    transform: scale(0.96);
+  }
+}
+
+.navIcon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: $radius-xl;
+  @include flex-center;
+}
+
+.navSymbol {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+}
+
+.navLabel {
+  margin-top: 12rpx;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  white-space: nowrap;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: $spacing-xl 0 $spacing-md;
+}
+
+.sectionEyebrow {
+  display: block;
+  margin-bottom: $spacing-xs;
+  color: $color-primary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 3rpx;
+}
+
+.sectionTitle {
+  display: block;
+  color: $color-text-primary;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+}
+
+.sectionCount {
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+  white-space: nowrap;
+}
+
+.articleList {
+  padding: 0 $spacing-md;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-lg;
+  background: $color-bg-card;
+  box-shadow: $shadow-card;
+}
+
+.articleCard {
+  display: flex;
+  padding: $spacing-lg 0;
+  border-bottom: 1rpx solid $color-divider;
+  transition: all $transition-fast;
+
+  &:active {
+    opacity: 0.72;
+  }
+}
+
+.articleCardLast {
+  border-bottom: 0;
+}
+
+.articleNumber {
+  width: 48rpx;
+  flex-shrink: 0;
+  padding-top: 6rpx;
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+}
+
+.articleBody {
+  flex: 1;
+  min-width: 0;
+  margin-left: $spacing-sm;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.articleCategory {
+  margin-bottom: 12rpx;
+  padding: 6rpx 12rpx;
+  border-radius: $radius-xs;
+  background: #eeeeff;
+  color: $color-primary;
+  font-size: $font-size-xs;
+  white-space: nowrap;
+}
+
+.articleTitle {
+  width: 100%;
+  color: $color-text-primary;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-normal;
+  @include text-ellipsis-multi(2);
+}
+
+.articleSummary {
+  width: 100%;
+  margin-top: $spacing-xs;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  line-height: $line-height-normal;
+  @include text-ellipsis-multi(2);
+}
+
+.articleMeta {
+  margin-top: $spacing-sm;
+  color: $color-text-tertiary;
+  font-size: $font-size-xs;
+}
+
+.listEnd {
+  display: block;
+  padding: $spacing-xl 0 $spacing-sm;
+  color: $color-text-tertiary;
+  font-size: $font-size-xs;
+  text-align: center;
+}
