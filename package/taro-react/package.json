@@ -10,6 +10,8 @@
     "framework": "React"
   },
   "scripts": {
+    "dev": "taro build --type h5 --watch --mode dev",
+    "mock": "taro build --type h5 --watch --mode mock",
     "build:weapp": "taro build --type weapp",
     "build:swan": "taro build --type swan",
     "build:alipay": "taro build --type alipay",
