@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Input, Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classnames from 'classnames';
-import { loginLocally } from '@/services/auth';
+import { login } from '@/services/auth';
 import styles from './index.module.scss';
 
 const LoginPage: React.FC = () => {
@@ -14,7 +14,7 @@ const LoginPage: React.FC = () => {
     Taro.showToast({ title, icon: 'none' });
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const normalizedAccount = account.trim();
     if (!/^1\d{10}$/.test(normalizedAccount)) {
       showValidationError('请输入正确的 11 位手机号');
@@ -27,14 +27,14 @@ const LoginPage: React.FC = () => {
 
     setSubmitting(true);
     try {
-      loginLocally(normalizedAccount);
+      await login(normalizedAccount, password);
       Taro.showToast({ title: '登录成功', icon: 'success' });
       Taro.redirectTo({ url: '/pages/mine/index' }).catch((error) => {
         console.error('[Login] 登录后跳转失败', error);
       });
     } catch (error) {
-      console.error('[Login] 本地登录失败', error);
-      showValidationError('登录失败，请稍后重试');
+      console.error('[Login] 登录失败', error);
+      showValidationError(error instanceof Error ? error.message : '登录失败，请稍后重试');
     } finally {
       setSubmitting(false);
     }
@@ -104,7 +104,7 @@ const LoginPage: React.FC = () => {
           </Button>
         </View>
 
-        <Text className={styles.privacyTip}>本模板使用本地演示登录，不会上传账号信息。</Text>
+        <Text className={styles.privacyTip}>本模板使用本地演示登录，mock 模式由本地 mock 接口处理，不会上传账号信息。</Text>
       </View>
     </View>
   );

@@ -2,7 +2,7 @@ import { defineConfig, type UserConfigExport } from "@tarojs/cli";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import devConfig from "./dev";
 import prodConfig from "./prod";
-import vitePluginImp from "vite-plugin-imp";
+
 // https://taro-docs.jd.com/docs/next/config#defineconfig-辅助函数
 export default defineConfig<"webpack5">(async (merge, { command, mode }) => {
   const baseConfig: UserConfigExport<"webpack5"> = {
@@ -99,6 +99,20 @@ export default defineConfig<"webpack5">(async (merge, { command, mode }) => {
       },
     },
   };
+  // 使用 --mode mock 启动时（npm run mock），自动开启接口 mock 拦截
+  const isMockMode = mode === "mock";
+  if (isMockMode)
+    baseConfig.plugins = [
+      ...(baseConfig.plugins ?? []),
+      [
+        "@tarojs/plugin-mock",
+        {
+          host: "localhost",
+          port: 3000,
+          // mocks: mockConfig,
+        },
+      ],
+    ];
 
   if (process.env.NODE_ENV === "development") {
     // 本地开发构建配置（不混淆压缩）
